@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/drive.css">
+    <title>Double Driver</title>
+</head>
+<body>
+    <h1>Driver</h1>
+
+    <p>Choose a Double: <select id="double-select"></select></p>
+    
+    <div id="controls" style="display: none;">
+        <button style="margin-left: 32px;" id="up" class="arrow">&uarr;</button><br>
+        <button id="left" class="arrow">&larr;</button>
+        <button id="right" class="arrow">&rarr;</button><br>
+        <button style="margin-left: 32px;" id="down" class="arrow">&darr;</button><br>
+        <p>Drive forward/backward by <input type="text"> m <button>Go</button></p>
+        <p>Turn left/right by <input type="text"> &deg; <button>Go</button></p>
+    </div>
+    
+    <script src="js/socket.io.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/drive.js"></script>
+</body>
+</html>
