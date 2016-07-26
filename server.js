@@ -2,7 +2,7 @@ var fs = require('fs');
 var express = require('express');
 var app = express();
 var path = require('path');
-var io = require('socket.io')(3000);
+var io = require('socket.io')(8443);
 
 var doubles = {}; // dict: serial -> socket
 
@@ -24,6 +24,7 @@ app.listen(80, function() {
 
 io.on('connection', function(socket) {
     socket.on("info", function(msg) {
+        console.log("Double info received");
         doubles["id" + msg.serial] = socket;
         socket.serial = msg.serial;
 		io.sockets.emit("doubles", Object.keys(doubles));
@@ -45,8 +46,7 @@ io.on('connection', function(socket) {
 	    socket.emit("doubles", Object.keys(doubles))
     });
     socket.on("control", function(msg) {
-        // get double from msg.serial
-        // emit to double
-        console.log(msg);
+        doublesocket = doubles[msg.serial];
+        doublesocket.emit("control", msg);
     });
 });

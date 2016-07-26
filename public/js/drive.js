@@ -1,6 +1,6 @@
 $(function(){
 
-var socket = io(':3000');
+var socket = io(':8443');
 
 socket.on('connect', function() {
     console.log('Connected to socket');
@@ -21,35 +21,43 @@ socket.on('doubles', function(doubles) {
 });
 
 $("#up").mousedown(function(){
-	socket.emit('control', {doulbe: $("#double-select").find(":selected").text(), forward: 'start'});
+	socket.emit('control', {serial: $("#double-select").find(":selected").text(), forward: 'start'});
 });
 
 $("#up").mouseup(function(){
-	socket.emit('control', {doulbe: $("#double-select").find(":selected").text(), forward: 'stop'});
+	socket.emit('control', {serial: $("#double-select").find(":selected").text(), forward: 'stop'});
 });
 
 $("#down").mousedown(function(){
-	socket.emit('control', {doulbe: $("#double-select").find(":selected").text(), backward: 'start'});
+	socket.emit('control', {serial: $("#double-select").find(":selected").text(), backward: 'start'});
 });
 
 $("#down").mouseup(function(){
-	socket.emit('control', {doulbe: $("#double-select").find(":selected").text(), backward: 'stop'});
+	socket.emit('control', {serial: $("#double-select").find(":selected").text(), backward: 'stop'});
 });
 
 $("#left").mousedown(function(){
-	socket.emit('control', {doulbe: $("#double-select").find(":selected").text(), left: 'start'});
+	socket.emit('control', {serial: $("#double-select").find(":selected").text(), left: 'start'});
 });
 
 $("#left").mouseup(function(){
-	socket.emit('control', {doulbe: $("#double-select").find(":selected").text(), left: 'stop'});
+	socket.emit('control', {serial: $("#double-select").find(":selected").text(), left: 'stop'});
 });
 
 $("#right").mousedown(function(){
-	socket.emit('control', {doulbe: $("#double-select").find(":selected").text(), right: 'start'});
+	socket.emit('control', {serial: $("#double-select").find(":selected").text(), right: 'start'});
 });
 
 $("#right").mouseup(function(){
-	socket.emit('control', {doulbe: $("#double-select").find(":selected").text(), right: 'stop'});
+	socket.emit('control', {serial: $("#double-select").find(":selected").text(), right: 'stop'});
+});
+
+$("#deploy").click(function(){
+	socket.emit('control', {serial: $("#double-select").find(":selected").text(), kickstand: 'deploy'});
+});
+
+$("#retract").click(function(){
+	socket.emit('control', {serial: $("#double-select").find(":selected").text(), kickstand: 'retract'});
 });
 
 });
