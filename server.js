@@ -2,7 +2,7 @@ var fs = require('fs');
 var express = require('express');
 var app = express();
 var path = require('path');
-var io = require('socket.io')(8443);
+var io = require('socket.io', {rememberTransport: false, transports: ['WebSocket', 'Flash Socket', 'AJAX long-polling']})(8443);
 
 var doubles = {}; // dict: serial -> socket
 
@@ -46,7 +46,10 @@ io.on('connection', function(socket) {
 	    socket.emit("doubles", Object.keys(doubles))
     });
     socket.on("control", function(msg) {
-        doublesocket = doubles[msg.serial];
-        doublesocket.emit("control", msg);
+	console.log(msg);
+        if (doubles[msg.serial]) {
+            doublesocket = doubles[msg.serial];
+            doublesocket.emit("control", msg);
+        }
     });
 });

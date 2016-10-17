@@ -1,6 +1,6 @@
 $(function(){
 
-window.socket = io(':8443');
+window.socket = io(':8443', { rememberTransport: false, transports: ['WebSocket', 'Flash Socket', 'AJAX long-polling']});
 
 socket.on('connect', function() {
     console.log('Connected to socket');
